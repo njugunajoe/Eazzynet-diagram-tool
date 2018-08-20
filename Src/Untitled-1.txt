@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+<div id="header"> header text </div>
+<div id="neck"> neck text </div>
+<div id="chest"> chest text </div>
+<div id="legs"> legs text </div>
+</body>
+</html>

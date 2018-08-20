@@ -1,0 +1,52 @@
+* {
+    // background-color: red;
+}
+
+body {
+    min-height: 1000px;
+    img {
+        position: fixed;
+        transform: scale(0.9);
+        right: 5px;
+    }
+    .mainContainer {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto auto;
+        main {
+            h1 {
+                z-index: 1;
+                text-align: center;
+                padding: 50px;
+            }
+            p {
+                padding: 50px 250px;
+            }
+            .half {
+                min-height: 400px;
+                text-align: center;
+                padding: 50px 0px;
+                p {
+                    width: 350px;
+                    display: block;
+                    padding: 20px;
+                    margin: 30px auto;
+                    font-weight: 400;
+                    font-size: 20px;
+                }
+            }
+            .half:hover {
+                // filter: blur(5px);
+            }
+            .diy {
+                background-color: rgb(255, 117, 62);
+                color: white;
+                // background-image: url('./../assets/images/indexPage/diy.jpg')
+            }
+            .preDesigned {
+                background-color: #eff;
+                // background-image: url('./../assets/images/indexPage/preDesigned.jpeg')
+            }
+        }
+    }
+}

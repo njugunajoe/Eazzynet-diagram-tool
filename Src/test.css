@@ -1,0 +1,62 @@
+body {
+    background-color: powderblue;
+}
+div {
+     font-size: 20px; float: none;
+}
+#canvas {
+    color: red;
+    background-color: yellow;
+    border-left-color: black;
+    border-width: 5px;
+}
+#devices{
+  background-color: blue;
+  border-width: medium;
+}
+
+#header{
+  background-color: orange
+}
+
+#header2{
+  background-color: white;
+}
+#canvas1{
+  background-color: brown;
+
+}#canvas1{
+  height: 200px;
+  overflow-y: scroll;
+  width: 170px;
+  min-width: 100px;
+  justify-content:left;
+
+}
+
+#header{
+  height:30px;
+  font-size: 20px
+}
+#header2{
+  height: 30px;
+  font-size: 20px;
+}
+#topologies{
+  background-color: green;
+  height: 200px;
+  overflow-y: scroll;
+  width: 170px;
+  min-width: 100px;
+
+}
+#canvas2{
+
+height: 150px;
+width: auto;
+overflow-y: scroll;
+overflow-x: scroll;
+}
+canvas{
+  width: 4000px;
+}

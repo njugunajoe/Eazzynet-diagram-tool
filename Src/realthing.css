@@ -1,0 +1,74 @@
+#header1 {
+    background-color: powderblue;
+    height: 40px;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    background-color: #F8F8F8;
+    width: 100%;
+}
+
+.lefthead ul {
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    transition: 0.3s;
+    height: 30px;
+    text-decoration: none;
+    font-size: 20px;
+    color: blue;
+    border-radius: 0 5px 5px 0;
+    left: 80px;
+    padding: 15px 20px;
+}
+
+.topologies {
+    background-color: grey;
+    height: 70px;
+    border-width: 5px;
+    border-color: black;
+    padding: 2px;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    justify-content: center;
+}
+
+#header2 {
+    background-color: lightblue;
+    height: 40px;
+    width: 100%;
+}
+
+#topologies {
+    overflow-y: scroll;
+    height: 270px;
+    min-width: 50px;
+    overflow-x: hidden;
+}
+
+#devices {
+    overflow-y: scroll;
+    height: 270px;
+    min-width: 50px;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    align-content: center;
+}
+
+.canvas {
+    background-color: yellow;
+    height: 80%;
+    float: right;
+    width: 80%;
+    min-width: 100px;
+    background-image: url(https://www.chicagocanvas.com/wp-content/uploads/2014/05/White-Canvas-500x500.jpg);
+}
+
+#main {
+    float: left;
+    font-family: monospace;
+    min-width: 50px;
+    width: 20%
+}

@@ -1,0 +1,95 @@
+* {
+    // background-color: red;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    position: fixed;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template: "nav nav" auto "header header"50px "aside main"1fr "footer footer"50px /250px 1fr;
+}
+
+nav {
+    background-color: red;
+    grid-area: nav;
+}
+
+header {
+    background-color: blue;
+    grid-area: header;
+}
+
+main {
+    background-color: gray;
+    grid-area: main;
+    overflow: scroll;
+}
+
+aside {
+    grid-area: aside;
+    height: 300px;
+    .half {
+        display: block;
+        overflow-y: scroll;
+        height: 50%;
+        margin: 0;
+    }
+    .top {
+        background-color: rgb(243, 243, 243);
+        .tile {
+            position: relative;
+            align-content: center;
+            display: block;
+            margin: 10px auto;
+            height: 50%;
+            .img {
+                height: 100%;
+                background: content-box contain;
+                background-clip: border-box;
+                background-position: center;
+                background-repeat: no-repeat;
+                position: relative;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+            .name {
+                z-index: 1;
+                display: block;
+                position: absolute;
+                color: red;
+                font-weight: 700;
+                top: 20px;
+                left: 10px;
+            }
+        }
+    }
+    .bottom {
+        background-color: rgb(252, 252, 252);
+        .device {
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            background-color: white;
+            columns: #222;
+            cursor: move;
+        }
+        .device:hover {
+            box-shadow: 2px 2px 20px -8px black;
+        }
+    }
+}
+
+footer {
+    background-color: darkcyan;
+    grid-area: footer;
+}
