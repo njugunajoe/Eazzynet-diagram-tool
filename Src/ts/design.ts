@@ -1,11 +1,11 @@
 
-let canvas:;
-var ctx;
-var x = 75;
-var y = 50;
-var WIDTH = 10000;
-var HEIGHT = 300;
-var dragok = false;
+let canvas;
+let ctx;
+let x = 75;
+let y = 50;
+let WIDTH = 10000;
+let HEIGHT = 3000;
+let dragok = false;
 
 function rect(x, y, w, h) {
     ctx.beginPath();

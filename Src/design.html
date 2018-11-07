@@ -3,30 +3,203 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">gu
     <title>Design </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="./assets/styles/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="css/design.css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="content-script-type" content="text/javascript" />
+    <meta http-equiv="content-style-type" content="text/css" />
+
+    <title>Where have I been? - Demo</title>
+    <meta name="description" content="Where have I been?" />
+
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+        google.load("jquery", "1.4.2");
+        google.load("jqueryui", "1.7.2");
+    </script>
+
+
+    <script type="text/javascript">
+        ////////////////////////////////
+        Project = {
+                Name: 'Joe',
+                Devices: []
+            }
+            ///////////////////////////////
+        $(document).ready(function() {
+            //Counter
+            counter = 0;
+            //Make element draggable
+            $(".drag").draggable({
+                helper: 'clone',
+                containment: 'frame',
+
+                //When first dragged
+                stop: function(ev, ui) {
+                    var pos = $(ui.helper).offset();
+
+                    objName = "#clonediv" + counter
+                    $(objName).css({
+                        "left": pos.left,
+                        "top": pos.top
+                    });
+                    $(objName).removeClass("drag");
+
+
+                    //When an existiung object is dragged
+                    $(objName).draggable({
+                        containment: 'parent',
+                        stop: function(ev, ui) {
+                            var pos = $(ui.helper).offset();
+                            console.log($(this).attr("id"));
+                            console.log(pos.left)
+                            console.log(pos.top)
+                                // Check if the object exists in array
+                            let deviceChecker = false;
+                            Project.Devices.forEach((device) => {
+                                if (device.devId === $(this).attr("id")) {
+                                    deviceChecker = true;
+                                }
+                            });
+                            if (deviceChecker) {
+                                //   true: Update the existing obj  
+                                Project.Devices
+                                dev = Project.Devices.map(function(device) {
+                                    if (device.devId === $(this).attr("id")) {
+                                        device.position = pos;
+                                    }
+                                });
+                                console.log(dev);
+
+                            } else {
+                                // false: Push obj to array
+                                Project.Devices.push({
+                                    devId: $(this).attr("id"),
+                                    position: pos
+                                });
+                            }
+
+                            console.log(Project);
+
+                        }
+                    });
+                }
+            });
+            //Make element droppable
+            $("#frame").droppable({
+                drop: function(ev, ui) {
+                    if (ui.helper.attr('id').search(/drag[0-9]/) != -1) {
+                        counter++;
+                        var element = $(ui.draggable).clone();
+                        element.addClass("tempclass clsss");
+                        $(this).append(element);
+                        $(".tempclass").attr("id", "clonediv" + counter);
+                        $("#clonediv" + counter).removeClass("tempclass");
+
+                        //Get the dynamically item id
+                        draggedNumber = ui.helper.attr('id').search(/drag([0-9])/)
+                        itemDragged = "dragged" + RegExp.$1
+
+
+                        $("#clonediv" + counter).addClass(itemDragged);
+                    }
+                }
+            });
+        });
+    </script>
+
 </head>
+
+
+
 
 <body>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
-            <img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Bootstrap
+            <img src="/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> EazzyNet
         </a>
     </nav>
-    <header>header</header>
+    <header>header
+        <button id="print">generate PDF</button>
+        <a href="./assets/cidr-javascript/"> <button id="subnet">subnet </button></a>
+
+
+    </header>
+
+
     <main class="canv">
-        <canvas id="canvas" width="2000" height="2000">
-    This text is displayed if your browser does not support HTML5 Canvas.
-</canvas>
+        <div id="wrapper">
+            <div id="options">
+                <div id="drag1" class="drag" style="background-image: url('assets/images/designPage/dragable/1.png')"></div>
+                <!-- end of drag1 -->
+                <div id="drag2" class="drag" style="background-image: url('assets/images/designPage/dragable/2.png')"></div>
+                <!-- end of drag2 -->
+                <div id="drag3" class="drag" style="background-image: url('assets/images/designPage/dragable/3.png')"></div>
+                <!-- end of drag3 -->
+                <div id="drag4" class="drag" style="background-image: url('assets/images/designPage/dragable/4.png')"></div>
+                <!-- end of drag4 -->
+                <div id="drag5" class="drag" style="background-image: url('assets/images/designPage/dragable/6.png')"></div>
+                <!-- end of drag5 -->
+                <div id="drag6" class="drag" style="background-image: url('assets/images/designPage/dragable/6.png')">
+                </div>
+                <!-- end of drag6 -->
+
+            </div>
+            <!-- end of options -->
+            <div id="frame">
+
+                <script>
+                    function createLine(x1,y1,x2,y2,lineId)
+                    {
+                    distance = Math.sqrt ( (x1-x2) *(x1-x2) )+( (y1-y2)*(y1-y2) );
+                    xMid = (x1 + x2)/2
+                    yMid = (y1 + y2)/2
+                    
+                    salopeInRadian=Math.atan2(y1 - y2, x1 - x2)
+                    salopeInDegrees = ( salopeInRadian * 180) / Math.PI;
+
+                    line = document.getElementById(lineId)
+                    line.style.width = distance
+                    line.style.top = yMid
+                    line.style.left= xMid -(distance/2)
+                    line.style.transform="rotate("+salopeInDegrees+"deg)";
+}
+                </script>
+                <!-- <div id="point1" >hhi</div>
+                <div id="point2" >hhi</div>
+                <div id="line1"></div> -->
+<script>createLine(200,500,300,700,"line1") 
+</script>
+
+                <h1><p hidden><u>EazzyNet</u></p><u>
+                    <p hidden> Thank you for choosing EazzyNet as preferred diagramming tool. </p>
+                    <p hidden><U>Router pricing and recommendation</U></p>
+                    <p hidden>There are several brands that offer router technologies, including Cisco, Mikrotik, Ubiquity, D-Link and
+                        TP-Link.
+                        Cisco routers are more complicated and require a lot of skill to configure. They offer very good service and
+                        endure long periods of time and traffic. Are expensive and unmanaged.Mikrotik and Ubiquity are somewhat middle range routers. Offer a good service and their pricing is also
+                        midrange.D-Link and TP-Link are usually managed devices.They are not as expensive and thus more common.</p>
+                    <p hidden><U>cable pricing and recommendation</U></p>
+                    <p hidden>Wired neworks use Ethernet or fibre cables for connectivity. Cost is usually high when purchasing cales.
+                        Wireless connection uses radi waves transmitted by an AP.Is less expensive and allows mobility of
+                        devices.</p>
+                    <p hidden><U>network pricing and recommendation</U></p>
+                    <p hidden>An IP address is a unique identifier of a connection to a device within the network. Is used to show path
+                        that is used to route traffic. Private IP addresses include 192.168.0.0, 10.10.0.0 and 172.16.0.0.These are
+                        mainly used for internal organization management.</p>
+
+                </h1>
+            </div>
+        </div>
     </main>
     <aside>
         <div class="half top">
             <div class="tile">
                 <div class="img" style="background-image: url('./assets/images/designPage/star.png')"></div>
-                <span class="name">STAR TOPOLOGY</span>
+                <span class="name">STARTOPOLOGY</span>
             </div>
             <div class="tile">
                 <div class="img" style="background-image: url('./assets/images/designPage/ring.png')"></div>
@@ -37,46 +210,100 @@
                 <span class="name">MESH TOPOLOGY</span>
             </div>
         </div>
+        <h3>lern more about: </h3>
         <div class="half bottom">
             <ul>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="router" class="router device" draggable="true">router</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="switch" class="switch device" draggable="true">switch</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="hub" class="hub device" draggable="true">hub</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="firewall" class="firewall device" draggable="true">firewall</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="workstation" class="workstation device" draggable="true">workstation</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="mobile" class="mobile device" draggable="true">mobile</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="wireless" class="wireless device" draggable="true">wireless</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="Cables" class="Cables device" draggable="true">Cables</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="laptop" class="laptop device" draggable="true">laptop</div>
-                </li>
-                <li>
-                    <div ondrag="startDrag()" ondragstart="handleDragEvent()" id="television" class="television device" draggable="true">television</div>
-                </li>
+                <a href="https://computer.howstuffworks.com/router.htm">
+                    <li>
+                        <div id="router" class="router device">router</div>
+                    </li>
+                </a>
+                <a href="https://computer.howstuffworks.com/lan-switch.htm">
+                    <li>
+                        <div id="switch" class="switch device">switch</div>
+                    </li>
+                </a>
+                <a href="http://sourcedaddy.com/networking/introducing-ip-addresses.html">
+                    <li>
+                        <div id="ip" class=" ip address device">ip address</div>
+                    </li>
+                </a>
+
+                <a href="https://computer.howstuffworks.com/firewall.htm">
+                    <li>
+                        <div id="firewall" class="firewall device">firewall</div>
+                    </li>
+                </a>
+
+                <a href="https://computer.howstuffworks.com/10-types-of-computers6.htm
+                ">
+                    <li>
+                        <div id="workstation" class="workstation device">workstation</div>
+                    </li>
+                </a>
+
+                <a href="https://electronics.howstuffworks.com/cell-phone.htm">
+                    <li>
+                        <div id="mobile" class="mobile device">mobile</div>
+                    </li>
+                </a>
+               
+                <a href="https://computer.howstuffworks.com/home-network2.htm">
+                    <li>
+                        <div id="cables" class="cable device">cables</div>
+                    </li>
+                </a>
+                <a href="https://computer.howstuffworks.com/laptop.htm">
+                    <li>
+                        <div id="laptop" class="laptop device">laptop</div>
+                    </li>
+                </a>
+                <a href="http://new.monitorsanywhere.com/hdmi-over-lan-explained/">
+                    <li>
+                        <div id="television" class="television device">television</div>
+                    </li>
+                </a>
             </ul>
         </div>
     </aside>
     <footer>footer</footer>
 </body>
-<!-- <script src="./assets/js/jquery.js"></script>
-<script src="./assets/js/popper.js"></script>
-<script src="./assets/js/bootstrap.min.js"></script> -->
+<!-- <script src="./js/jquery-1.12.3.min.js"></script> -->
+<script src="./js/jspdf.min.js"></script>
 <script type="text/javascript" src="js/design.js"></script>
+<script type="text/javascript" src="./js/html-screen-capture.js"></script>
+<script>
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+        '#editor': function(element, renderer) {
+            return true;
+        }
+    };
+
+    $('#print').click(function() {
+        var obj = htmlScreenCaptureJs.capture(
+            htmlScreenCaptureJs.OutputType.STRING,
+            window.document, {
+                'imageFormatForDataUrl': 'image/jpeg',
+                'imageQualityForDataUrl': 1.0
+            }
+        );
+        // var element = document.createElement('div');
+        // element.innerHTML = obj;
+        // console.log(document.getElementById('frame').innerHTML);
+        var el = document.getElementById('frame');
+
+        var file = prompt("Please enter your file name:", "Network Design");
+        if (file == null || file == "") {
+
+        } else {
+            doc.fromHTML(document.getElementById('frame').innerHTML, 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save(file);
+        }
+    });
+</script>
 
 </html>
